@@ -1,5 +1,30 @@
+#
 # MTI860_projet
 
+Expérience de recherche en réalité virtuelle : 
+
+DUSE Mathieu
+
+Launois Margaux
+
+ETS Montréal 2022
+
+MTI860
+
+## 
+### Pluggin et assets utilisés :
+Virtual IK
+
+Development Kit Kinect (Unity Pro needed)
+
+BodyBuilder Asset Pack
+
+...
+
+
+
+## 
+### KANBAN
 ### DONE
 - [x] Découverte de la VR
 - [x] Découverte d’Unity
