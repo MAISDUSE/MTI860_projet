@@ -20,6 +20,21 @@ Development Kit Kinect (Unity Pro needed)
 BodyBuilder Asset Pack
 
 ...
+##
+### Run on oculus with cable link :
+
+Unity :
+
+&emsp; Edit Project settings
+        
+&emsp; XR plugin Management PC vs android
+        
+Dans le casque activer oculus Link :
+
+&emsp;  Settings Oculus links enable 
+        
+&emsp; Authorise link
+        
 
 
 
@@ -40,9 +55,10 @@ BodyBuilder Asset Pack
 - [ ] [ML] Pause Menu (Reprendre, Recommencer, Quitter) (déclenchable avec les commandes sur le casque)
 - [ ] [ML & MD] Fusionner les environnements RV & Kinect - câble link & carte graphique nécessaire
 (Vision utilisateur = quest / mouvement utilisateur = Kinect pour les membres et Quest pour la tête)
+- [ ] [ML & MD] Git toutes les scènes dans un seul projet
 
 ### TODO
-- [ ] [ML & MD] Git toutes les scènes dans un seul projet
+
 - [ ] [MD] La barre olympique suit les mouvement des contrôleurs
 - [ ] [MD] Les mains de l’Avatar “snap into place” lorsque l’utilisateur tient la barre virtuelle à l’aide du Hand tracking d’Oculus (en réalité il tiendra un manche a balais avec les contrôleurs fixés aux extrémitées)
         a. Mettre en place le hand tracking
