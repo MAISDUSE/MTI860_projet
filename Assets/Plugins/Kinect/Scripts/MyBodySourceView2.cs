@@ -17,7 +17,7 @@ public class MyBodySourceView2 : MonoBehaviour
     public GameObject mShoulderRight;
 
     public GameObject BodySourceManager;
-    
+
     private BodySourceManager _BodyManager;
 
 
@@ -33,7 +33,7 @@ public class MyBodySourceView2 : MonoBehaviour
         JointType.ShoulderRight,
         JointType.KneeLeft,
         JointType.KneeRight
-        
+
 
     };
     private Dictionary<JointType, GameObject> _BoneMap = new Dictionary<JointType, GameObject>();
@@ -148,7 +148,11 @@ public class MyBodySourceView2 : MonoBehaviour
 
     private GameObject CreateBodyObject(ulong id)
     {
+
+
+
         GameObject body = new GameObject("Body:" + id);
+
         this._BoneMap.Add(_joints[0], mHandLeft);
         this._BoneMap.Add(_joints[1], mHandRight);
         this._BoneMap.Add(_joints[2], mFootLeft);
@@ -159,7 +163,7 @@ public class MyBodySourceView2 : MonoBehaviour
         this._BoneMap.Add(_joints[7], mKneeLeft);
         this._BoneMap.Add(_joints[8], mKneeRight);
 
-       
+
 
         foreach (JointType joint in _BoneMap.Keys)
         {
@@ -192,6 +196,7 @@ public class MyBodySourceView2 : MonoBehaviour
 
             Transform jointObject = bodyObject.transform.Find(_joint.ToString());
             jointObject.position = targetPosition;
+            //Debug.Log(jointObject.position);
         }
     }
 
