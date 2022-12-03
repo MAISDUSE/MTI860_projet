@@ -16,7 +16,10 @@ public class MyBodySourceView2 : MonoBehaviour
     public GameObject mShoulderLeft;
     public GameObject mShoulderRight;
 
-    public BodySourceManager mBodySourceManager;
+    public GameObject BodySourceManager;
+
+    private BodySourceManager _BodyManager;
+
 
     private Dictionary<ulong, GameObject> _Bodies = new Dictionary<ulong, GameObject>();
     private List<JointType> _joints = new List<JointType>
@@ -30,7 +33,7 @@ public class MyBodySourceView2 : MonoBehaviour
         JointType.ShoulderRight,
         JointType.KneeLeft,
         JointType.KneeRight
-        
+
 
     };
     private Dictionary<JointType, GameObject> _BoneMap = new Dictionary<JointType, GameObject>();
@@ -70,12 +73,22 @@ public class MyBodySourceView2 : MonoBehaviour
     void Update()
     {
         #region Get Kinect Data
-        Body[] data = mBodySourceManager.GetData();
-        if (data == null)
+        if (BodySourceManager == null)
         {
             return;
         }
 
+        _BodyManager = BodySourceManager.GetComponent<BodySourceManager>();
+        if (_BodyManager == null)
+        {
+            return;
+        }
+
+        Body[] data = _BodyManager.GetData();
+        if (data == null)
+        {
+            return;
+        }
 
         List<ulong> trackedIds = new List<ulong>();
         foreach (var body in data)
@@ -102,6 +115,12 @@ public class MyBodySourceView2 : MonoBehaviour
             {
                 Destroy(_Bodies[trackingId]);
                 _Bodies.Remove(trackingId);
+                //move joints in their initial repo
+                GameObject i = GameObject.Find("mJoints");
+                foreach (JointType joint in this._BoneMap.Keys)
+                {
+                    this._BoneMap[joint].transform.parent = i.transform;
+                }
             }
         }
         #endregion
@@ -129,7 +148,11 @@ public class MyBodySourceView2 : MonoBehaviour
 
     private GameObject CreateBodyObject(ulong id)
     {
+
+
+
         GameObject body = new GameObject("Body:" + id);
+
         this._BoneMap.Add(_joints[0], mHandLeft);
         this._BoneMap.Add(_joints[1], mHandRight);
         this._BoneMap.Add(_joints[2], mFootLeft);
@@ -140,10 +163,11 @@ public class MyBodySourceView2 : MonoBehaviour
         this._BoneMap.Add(_joints[7], mKneeLeft);
         this._BoneMap.Add(_joints[8], mKneeRight);
 
-       
+
 
         foreach (JointType joint in _BoneMap.Keys)
         {
+            _BoneMap[joint].transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             _BoneMap[joint].transform.parent = body.transform;
         }
 
@@ -172,12 +196,13 @@ public class MyBodySourceView2 : MonoBehaviour
 
             Transform jointObject = bodyObject.transform.Find(_joint.ToString());
             jointObject.position = targetPosition;
+            //Debug.Log(jointObject.position);
         }
     }
 
 
     private static Vector3 GetVector3FromJoint(Joint joint)
     {
-        return new Vector3(joint.Position.X * 10, joint.Position.Y * 10, joint.Position.Z * 10);
+        return new Vector3(joint.Position.X, joint.Position.Y, -joint.Position.Z);
     }
 }
